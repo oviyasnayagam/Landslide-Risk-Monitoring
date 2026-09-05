@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LandslideGuard | AI Landslide Risk Monitoring</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Our CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =============================== -->
+    <!-- HEADER -->
+    <!-- =============================== -->
+
+    <header>
+
+        <div class="logo">
+
+            <div class="logo-icon">🌍</div>
+
+            <div>
+                <h1>LandslideGuard</h1>
+                <p>AI-Based Early Warning & Risk Monitoring</p>
+            </div>
+
+        </div>
+
+        <div class="status">
+            <span class="status-dot"></span>
+            System Online
+        </div>
+
+    </header>
+
+
+    <!-- =============================== -->
+    <!-- MAIN -->
+    <!-- =============================== -->
+
+    <main class="container">
+
+
+        <!-- HERO SECTION -->
+
+        <section class="hero">
+
+            <div>
+
+                <p class="tag">
+                    SIH 2026 • DISASTER MANAGEMENT
+                </p>
+
+                <h2>
+                    AI-Powered Landslide
+                    <span>Risk Prediction</span>
+                </h2>
+
+                <p class="hero-text">
+                    Monitor environmental conditions, predict landslide
+                    probability and identify high-risk regions using
+                    Artificial Intelligence and GIS.
+                </p>
+
+            </div>
+
+            <div class="hero-icon">
+                ⛰️
+            </div>
+
+        </section>
+
+
+        <!-- =============================== -->
+        <!-- DASHBOARD CARDS -->
+        <!-- =============================== -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">📍</div>
+
+                <div>
+                    <p>Monitoring Points</p>
+                    <h3>14</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🌧️</div>
+
+                <div>
+                    <p>Rainfall Status</p>
+                    <h3>Active</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🤖</div>
+
+                <div>
+                    <p>AI Model</p>
+                    <h3>Random Forest</h3>
+                </div>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">🚨</div>
+
+                <div>
+                    <p>Alert Status</p>
+
+                    <h3 id="dashboardRisk">
+                        Ready
+                    </h3>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =============================== -->
+        <!-- CONTENT GRID -->
+        <!-- =============================== -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- =============================== -->
+            <!-- AI PREDICTION PANEL -->
+            <!-- =============================== -->
+
+            <div class="card prediction-card">
+
+                <div class="card-title">
+
+                    <div>
+
+                        <p class="small-title">
+                            AI ANALYSIS
+                        </p>
+
+                        <h2>
+                            Predict Landslide Risk
+                        </h2>
+
+                    </div>
+
+                    <span class="ai-badge">
+                        AI POWERED
+                    </span>
+
+                </div>
+
+
+                <!-- INPUT FORM -->
+
+                <div class="form-grid">
+
+
+                    <!-- Rainfall -->
+
+                    <div class="input-group">
+
+                        <label>
+                            🌧️ Rainfall (mm)
+                        </label>
+
+                        <input
+                            id="rainfall"
+                            type="number"
+                            placeholder="e.g. 120"
+                        >
+
+                    </div>
+
+
+                    <!-- Slope -->
+
+                    <div class="input-group">
+
+                        <label>
+                            ⛰️ Slope (degrees)
+                        </label>
+
+                        <input
+                            id="slope"
+                            type="number"
+                            placeholder="e.g. 35"
+                        >
+
+                    </div>
+
+
+                    <!-- Elevation -->
+
+                    <div class="input-group">
+
+                        <label>
+                            📏 Elevation (m)
+                        </label>
+
+                        <input
+                            id="elevation"
+                            type="number"
+                            placeholder="e.g. 450"
+                        >
+
+                    </div>
+
+
+                    <!-- Soil -->
+
+                    <div class="input-group">
+
+                        <label>
+                            🪨 Soil Type
+                        </label>
+
+                        <select id="soil">
+
+                            <option value="">
+                                Select soil
+                            </option>
+
+                            <option value="clay">
+                                Clay
+                            </option>
+
+                            <option value="loam">
+                                Loam
+                            </option>
+
+                            <option value="loamy">
+                                Loamy
+                            </option>
+
+                            <option value="sand">
+                                Sand
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Vegetation -->
+
+                    <div class="input-group">
+
+                        <label>
+                            🌿 Vegetation
+                        </label>
+
+                        <select id="vegetation">
+
+                            <option value="">
+                                Select vegetation
+                            </option>
+
+                            <option value="high">
+                                High
+                            </option>
+
+                            <option value="medium">
+                                Medium
+                            </option>
+
+                            <option value="low">
+                                Low
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PREDICT BUTTON -->
+
+                <button
+                    class="predict-btn"
+                    onclick="predictRisk()">
+
+                    🔍 Analyze Landslide Risk
+
+                </button>
+
+
+                <!-- =============================== -->
+                <!-- RESULT -->
+                <!-- =============================== -->
+
+                <div class="result-box">
+
+
+                    <div class="result-left">
+
+                        <p>
+                            Landslide Probability
+                        </p>
+
+                        <h2 id="probability">
+                            --%
+                        </h2>
+
+                    </div>
+
+
+                    <div class="risk-display">
+
+                        <p>
+                            Risk Level
+                        </p>
+
+                        <h2 id="risk">
+                            WAITING
+                        </h2>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =============================== -->
+            <!-- GIS MAP -->
+            <!-- =============================== -->
+
+            <div class="card map-card">
+
+                <div class="card-title">
+
+                    <div>
+
+                        <p class="small-title">
+                            GIS MONITORING
+                        </p>
+
+                        <h2>
+                            Risk Monitoring Map
+                        </h2>
+
+                    </div>
+
+                    <span class="live-badge">
+                        ● LIVE
+                    </span>
+
+                </div>
+
+
+                <!-- MAP -->
+
+                <div id="map"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =============================== -->
+        <!-- EARLY WARNING -->
+        <!-- =============================== -->
+
+        <section class="card alert-card">
+
+            <div class="alert-icon">
+                🚨
+            </div>
+
+            <div>
+
+                <p class="small-title">
+                    EARLY WARNING SYSTEM
+                </p>
+
+                <h2 id="alertTitle">
+                    No Active Warning
+                </h2>
+
+                <p id="alertMessage">
+                    Enter environmental parameters above to
+                    generate an AI-based landslide risk assessment.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- =============================== -->
+        <!-- HOW IT WORKS -->
+        <!-- =============================== -->
+
+        <section class="card">
+
+            <div class="section-heading">
+
+                <p class="small-title">
+                    SYSTEM WORKFLOW
+                </p>
+
+                <h2>
+                    How LandslideGuard Works
+                </h2>
+
+            </div>
+
+
+            <div class="workflow">
+
+
+                <!-- STEP 1 -->
+
+                <div class="workflow-step">
+
+                    <span>01</span>
+
+                    <h3>
+                        Environmental Data
+                    </h3>
+
+                    <p>
+                        Rainfall, slope, elevation,
+                        soil and vegetation data.
+                    </p>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+
+                <!-- STEP 2 -->
+
+                <div class="workflow-step">
+
+                    <span>02</span>
+
+                    <h3>
+                        AI Prediction
+                    </h3>
+
+                    <p>
+                        Random Forest analyzes the
+                        environmental conditions.
+                    </p>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+
+                <!-- STEP 3 -->
+
+                <div class="workflow-step">
+
+                    <span>03</span>
+
+                    <h3>
+                        Risk Assessment
+                    </h3>
+
+                    <p>
+                        Probability is converted into
+                        risk levels.
+                    </p>
+
+                </div>
+
+
+                <div class="arrow">
+                    →
+                </div>
+
+
+                <!-- STEP 4 -->
+
+                <div class="workflow-step">
+
+                    <span>04</span>
+
+                    <h3>
+                        Early Warning
+                    </h3>
+
+                    <p>
+                        High-risk locations can trigger
+                        alerts and evacuation planning.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =============================== -->
+    <!-- FOOTER -->
+    <!-- =============================== -->
+
+    <footer>
+
+        <p>
+            LandslideGuard • AI-Based Early Warning &
+            Landslide Risk Monitoring System
+        </p>
+
+        <span>
+            SIH 2026
+        </span>
+
+    </footer>
+
+
+    <!-- =============================== -->
+    <!-- JAVASCRIPT LIBRARIES -->
+    <!-- =============================== -->
+
+    <!-- Leaflet JS -->
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+
+    <!-- Our JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
