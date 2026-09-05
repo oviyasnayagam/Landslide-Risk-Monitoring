@@ -1,0 +1,16 @@
+latitude,longitude,rainfall,slope,elevation,soil,vegetation,landslide
+11.01,76.95,120,35,450,clay,low,1
+11.02,76.96,40,12,300,sand,high,0
+11.03,76.97,180,42,520,clay,low,1
+11.04,76.98,60,18,350,loam,high,0
+11.05,76.99,150,38,480,clay,medium,1
+11.06,77.00,30,10,280,sand,high,0
+11.07,77.01,200,45,600,clay,low,1
+11.08,77.02,55,15,320,loam,high,0
+11.09,77.03,170,40,500,clay,medium,1
+11.10,77.04,45,13,290,sand,high,0
+11.11,77.05,130,32,430,loam,medium,1
+11.12,77.06,70,20,360,loam,high,0
+11.13,77.07,190,44,550,clay,low,1
+11.14,77.08,35,8,250,sand,high,0
+11.15,77.09,160,36,470,clay,medium,1
